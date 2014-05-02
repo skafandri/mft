@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Mft{% endblock %}</title>
+        {% block css %}
+            {% stylesheets
+            'bundles/mftbase/css/bootstrap/*'
+            'bundles/mftbase/css/jquery/*'
+            'bundles/mftbase/css/*'
+              %}
+            <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        {% block js %}
+            {% javascripts
+            'bundles/mftbase/js/jquery/jquery.min.js'
+            'bundles/mftbase/js/jquery/*'
+            'bundles/mftbase/js/*'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}" ></script>
+            {% endjavascripts %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% include 'MftBaseBundle:Base:header.html.twig'%}
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>

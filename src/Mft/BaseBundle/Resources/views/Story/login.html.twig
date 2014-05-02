@@ -1,0 +1,16 @@
+{% extends "MftBundle:Base:base.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    {% javascripts
+            'bundles/mftbase/js/*'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}" ></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+    
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1"></div>            
+        </div>
+{% endblock %}

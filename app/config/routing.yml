@@ -1,0 +1,8 @@
+mft_admin:
+    resource: "@MftAdminBundle/Resources/config/routing.xml"
+    prefix:   /admin/
+
+mft_base:
+    resource: "@MftBaseBundle/Resources/config/routing.xml"
+    prefix:   /
+
