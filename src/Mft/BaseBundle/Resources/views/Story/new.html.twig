@@ -1,0 +1,53 @@
+{% extends "MftBaseBundle:Base:3-columns.html.twig" %}
+{% block js %}
+    {{ parent() }}
+    <script type="text/javascript">
+        var tagsUrl = "{{ path('mft_base_ajax_tags_get') }}";
+        var tags = [];
+    </script>
+            
+{% endblock %}
+        
+{% block center %}
+<div id="div-story-new">
+    <span class="h3">{{'story.new.header'|trans}}</span>
+    <form role="form" id="form-story-new">
+        <div class="form-group">
+            <label>{{'story.new.type'|trans}}</label>
+            <div class="btn-group btn-group-justified story-types">
+                {% set first = true %}
+                {% for type in types %}
+                    {% include 'MftBaseBundle:Story:story-type.html.twig' with {'type': type, 'first': first} %}
+                    {% set first = false %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="story-new-title">{{'story.new.title'|trans}}</label>
+            <input type="text" id="story-new-title" class="form-control" placeholder="{{'story.new.title-placeholder'|trans}}">
+        </div>
+        <div class="form-group">
+            <label for="story-new-post">{{'story.new.post'|trans}}</label>
+            <textarea class="form-control" rows="5" id="story-new-post">{{'story.new.post-placeholder'|trans}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="story-new-tags">{{'story.new.tags'|trans}}</label>
+            <div  id="story-new-tags"  class="form-control" contenteditable="true" placeholder="{{'story.new.tags-placeholder'|trans}}">
+            </div>
+        <span class="small pull-right btn btn-link" id="cmd-story-new-options">{{'more-options'|trans}}</span>
+        <div id="div-story-new-options">
+            <div class="form-group" >
+                <label>
+                    <input type="checkbox" id="story-new-multiwriter"> {{'story.new.multiwriter'|trans}}
+                </label>
+            </div>
+            <div class="form-group" >
+                <label>
+                    <input type="checkbox" id="story-new-secure"> {{'story.new.secure'|trans}}
+                </label>
+            </div>
+        </div>
+        <button  class="btn btn-primary btn-lg">{{'story.new.submit'|trans}}</button>
+    </form>
+</div>
+{% endblock %}

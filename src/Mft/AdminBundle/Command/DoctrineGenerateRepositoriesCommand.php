@@ -35,12 +35,11 @@ class DoctrineGenerateRepositoriesCommand extends ContainerAwareCommand {
             $repositoryNameSpace = str_replace('Entity', 'Repository', $entityNameSpace);
             $entityPath = $srcPath.str_replace("\\", "/", $entityNameSpace).'/'.$entityName.".php";
             $entitySource = file_get_contents($entityPath);
-            $repositoryClass = str_replace("Entity\\$entityName", "Repository\\".$entityName."Repository", $entityNameSpace);
+            $repositoryClass = str_replace("Entity", "Repository\\".$entityName."Repository", $entityNameSpace);
             $repositoryDirectory = $srcPath.str_replace("\\", "/", $repositoryNameSpace);
             $repositoryPath = $repositoryDirectory.'/'.$entityName."Repository.php";
             $entitySource = preg_replace("/@ORM\\\\Entity/", "@ORM\Entity(repositoryClass=\"$repositoryClass\")", $entitySource, 1);
             $repositorySource = $engine->render($this->repositoryTemplate, array('namespace' => $repositoryNameSpace, 'name' => $entityName));
-            
             if(!is_dir($repositoryDirectory)){
                 mkdir($repositoryDirectory);
             }

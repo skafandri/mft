@@ -4,17 +4,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    
     <parameters>
-        <parameter key="mft_base.example.class">Mft\BaseBundle\Example</parameter>
+        <parameter key="mft.base.abstract.class">Mft\BaseBundle\Service\AbstractService</parameter>
+        <parameter key="mft.base.tag.class">Mft\BaseBundle\Service\TagService</parameter>
+        <parameter key="mft.base.serializer.class">Mft\BaseBundle\Service\SerializerService</parameter>
     </parameters>
 
     <services>
-        <service id="mft_base.example" class="%mft_base.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="mft.base.abstract" class="%mft.base.abstract.class%" abstract="true">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="mft.base.tag" class="%mft.base.tag.class%" parent="mft.base.abstract">
+        </service>
+        <service id="mft.base.serializer" class="%mft.base.serializer.class%" parent="mft.base.abstract">
         </service>
     </services>
-    -->
+    
 </container>

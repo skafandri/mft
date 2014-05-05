@@ -7,4 +7,14 @@
     <route id="mft_base_homepage" pattern="/">
         <default key="_controller">MftBaseBundle:Default:index</default>
     </route>
+    
+    <route id="mft_base_story_new" pattern="/story/new">
+        <default key="_controller">MftBaseBundle:Story:new</default>
+    </route>
+    <route id="mft_base_story_view" pattern="/story/view">
+        <default key="_controller">MftBaseBundle:Story:view</default>
+    </route>
+    <route id="mft_base_ajax_tags_get" pattern="/ajax/tags/get">
+        <default key="_controller">MftBaseBundle:Tag:getTagsAjax</default>
+    </route>
 </routes>

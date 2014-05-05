@@ -1,0 +1,77 @@
+<?php
+
+namespace Mft\BaseBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Writer
+ *
+ * @ORM\Table(name="writer", indexes={@ORM\Index(name="fk_writer_image1_idx", columns={"image_id"})})
+ * @ORM\Entity
+ */
+class Writer
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="screenname", type="string", length=45, nullable=true)
+     */
+    private $screenname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=100, nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_time", type="datetime", nullable=true)
+     */
+    private $createTime;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="story_count", type="integer", nullable=true)
+     */
+    private $storyCount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="post_count", type="integer", nullable=true)
+     */
+    private $postCount;
+
+    /**
+     * @var \Image
+     *
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * })
+     */
+    private $image;
+
+
+}

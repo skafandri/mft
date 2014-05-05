@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Story
  *
- * @ORM\Table(name="story", indexes={@ORM\Index(name="fk_story_story_type_idx", columns={"story_type_id"}), @ORM\Index(name="fk_story_writer1_idx", columns={"writer_id"})})
- * @ORM\Entity(repositoryClass="Mft\BaseBundle\Entity")
+ * @ORM\Table(name="story", indexes={@ORM\Index(name="fk_story_story_type_idx", columns={"story_type_id"}), @ORM\Index(name="fk_story_writer1_idx", columns={"writer_id"}), @ORM\Index(name="fk_story_image1_idx", columns={"image_id"})})
+ * @ORM\Entity(repositoryClass="Mft\BaseBundle\Repository\StoryRepository")
  */
 class Story
 {
@@ -27,13 +27,6 @@ class Story
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="text", type="text", nullable=true)
-     */
-    private $text;
 
     /**
      * @var \DateTime
@@ -76,6 +69,16 @@ class Story
      * @ORM\Column(name="secure", type="boolean", nullable=true)
      */
     private $secure = '0';
+
+    /**
+     * @var \Image
+     *
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * })
+     */
+    private $image;
 
     /**
      * @var \StoryType
@@ -152,29 +155,6 @@ class Story
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set text
-     *
-     * @param string $text
-     * @return Story
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-
-        return $this;
-    }
-
-    /**
-     * Get text
-     *
-     * @return string 
-     */
-    public function getText()
-    {
-        return $this->text;
     }
 
     /**
@@ -313,6 +293,29 @@ class Story
     public function getSecure()
     {
         return $this->secure;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Mft\BaseBundle\Entity\Image $image
+     * @return Story
+     */
+    public function setImage(\Mft\BaseBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Mft\BaseBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**

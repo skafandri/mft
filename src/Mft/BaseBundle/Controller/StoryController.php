@@ -17,5 +17,11 @@ class StoryController extends Controller
     
     public function newAction(){
         
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository('MftBaseBundle:StoryType');
+        $storyTypes = $repository->findAll();
+        /** @var \Mft\BaseBundle\Service\TagService $tagService */
+        $tagService = $this->get('mft.base.tag');
+        return $this->render('MftBaseBundle:Story:new.html.twig', array('types' => $storyTypes, 'tags' => $tagService->getTags()));
     }
 }

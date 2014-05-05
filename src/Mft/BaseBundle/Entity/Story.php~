@@ -1,0 +1,126 @@
+<?php
+
+namespace Mft\BaseBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Story
+ *
+ * @ORM\Table(name="story", indexes={@ORM\Index(name="fk_story_story_type_idx", columns={"story_type_id"}), @ORM\Index(name="fk_story_writer1_idx", columns={"writer_id"}), @ORM\Index(name="fk_story_image1_idx", columns={"image_id"})})
+ * @ORM\Entity
+ */
+class Story
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_time", type="datetime", nullable=true)
+     */
+    private $createTime;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="views", type="integer", nullable=true)
+     */
+    private $views = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="likes", type="integer", nullable=true)
+     */
+    private $likes = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="secure_link", type="string", length=255, nullable=true)
+     */
+    private $secureLink;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="multi_writers", type="boolean", nullable=true)
+     */
+    private $multiWriters;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="secure", type="boolean", nullable=true)
+     */
+    private $secure = '0';
+
+    /**
+     * @var \Image
+     *
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * })
+     */
+    private $image;
+
+    /**
+     * @var \StoryType
+     *
+     * @ORM\ManyToOne(targetEntity="StoryType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="story_type_id", referencedColumnName="id")
+     * })
+     */
+    private $storyType;
+
+    /**
+     * @var \Writer
+     *
+     * @ORM\ManyToOne(targetEntity="Writer")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="writer_id", referencedColumnName="id")
+     * })
+     */
+    private $writer;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="story")
+     * @ORM\JoinTable(name="story_has_tag",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="story_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $tag;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tag = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

@@ -1,0 +1,6 @@
+<div type="button" class="btn btn-default btn-lg story-type {% if first %}btn-primary{% endif %}"  id="story-type-{{type.id}}" data-type="{{type.id}}">
+    <span class="h4">{{('story.type.'~type.type~'.title')|trans}}</span>
+    <p class="text-justify small">
+        {{('story.type.'~type.type~'.description')|trans|replace({'{min}':type.minPostSize, '{max}':type.maxPostSize})}}
+    </p>
+</div>

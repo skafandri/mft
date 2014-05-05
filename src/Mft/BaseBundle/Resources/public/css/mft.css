@@ -1,3 +1,29 @@
 .new-story{
+    font-size: 120%;
+    font-weight: bold;
     width: 100%;
+}
+
+.story-types{
+    padding: 10px;
+}
+p{
+    white-space: pre-wrap;
+}
+#div-story-new-options{
+    display: none;
+}
+
+.tag{
+    padding-top: 8px;
+    margin-right: 4px;
+    
+}
+.tag-label{
+    margin-top:1px;
+}
+.tag .ui-icon{
+    margin-top: -2px;
+    margin-left: 5px;
+    cursor: pointer;
 }

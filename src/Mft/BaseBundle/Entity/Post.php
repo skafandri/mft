@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Post
  *
  * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_story1_idx", columns={"story_id"}), @ORM\Index(name="fk_post_writer1_idx", columns={"writer_id"})})
- * @ORM\Entity(repositoryClass="Mft\BaseBundle\Entity")
+ * @ORM\Entity(repositoryClass="Mft\BaseBundle\Repository\PostRepository")
  */
 class Post
 {
@@ -55,6 +55,28 @@ class Post
      */
     private $writer;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Image", inversedBy="post")
+     * @ORM\JoinTable(name="post_has_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $image;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -157,5 +179,38 @@ class Post
     public function getWriter()
     {
         return $this->writer;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \Mft\BaseBundle\Entity\Image $image
+     * @return Post
+     */
+    public function addImage(\Mft\BaseBundle\Entity\Image $image)
+    {
+        $this->image[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \Mft\BaseBundle\Entity\Image $image
+     */
+    public function removeImage(\Mft\BaseBundle\Entity\Image $image)
+    {
+        $this->image->removeElement($image);
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

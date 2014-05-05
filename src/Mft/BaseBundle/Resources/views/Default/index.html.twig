@@ -1,23 +1,7 @@
-{% extends "MftBaseBundle:Base:base.html.twig" %}
-{% block js %}
-    {{ parent() }}
-    {% javascripts
-            'bundles/mftbase/js/*'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}" ></script>
-    {% endjavascripts %}
-{% endblock %}
+{% extends "MftBaseBundle:Base:3-columns.html.twig" %}
 
-{% block body %}
-    
-        <div class="row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-8 pull-right">
-                    <button type="button" class="btn btn-primary new-story">{{'new-story'|trans}}</button>
-                </div>
-                
-            </div> 
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div> 
-        </div>
+{% block center %}
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-10 pull-right">
+        <a href="{{path('mft_base_story_new')}}" class="btn btn-primary new-story">{{'new-story'|trans}}</a>
+    </div>
 {% endblock %}

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * StoryType
  *
  * @ORM\Table(name="story_type")
- * @ORM\Entity(repositoryClass="Mft\BaseBundle\Entity")
+ * @ORM\Entity(repositoryClass="Mft\BaseBundle\Repository\StoryTypeRepository")
  */
 class StoryType
 {
@@ -29,6 +29,13 @@ class StoryType
     private $type;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=true)
+     */
+    private $name;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="max_post_size", type="integer", nullable=true)
@@ -36,11 +43,11 @@ class StoryType
     private $maxPostSize;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="name", type="string", length=45, nullable=true)
+     * @ORM\Column(name="min_post_size", type="integer", nullable=true)
      */
-    private $name;
+    private $minPostSize;
 
 
 
@@ -78,6 +85,29 @@ class StoryType
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     * @return StoryType
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set maxPostSize
      *
      * @param integer $maxPostSize
@@ -101,25 +131,25 @@ class StoryType
     }
 
     /**
-     * Set name
+     * Set minPostSize
      *
-     * @param string $name
+     * @param integer $minPostSize
      * @return StoryType
      */
-    public function setName($name)
+    public function setMinPostSize($minPostSize)
     {
-        $this->name = $name;
+        $this->minPostSize = $minPostSize;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get minPostSize
      *
-     * @return string 
+     * @return integer 
      */
-    public function getName()
+    public function getMinPostSize()
     {
-        return $this->name;
+        return $this->minPostSize;
     }
 }

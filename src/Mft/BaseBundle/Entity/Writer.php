@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Writer
  *
- * @ORM\Table(name="writer")
- * @ORM\Entity(repositoryClass="Mft\BaseBundle\Entity")
+ * @ORM\Table(name="writer", indexes={@ORM\Index(name="fk_writer_image1_idx", columns={"image_id"})})
+ * @ORM\Entity(repositoryClass="Mft\BaseBundle\Repository\WriterRepository")
  */
 class Writer
 {
@@ -62,6 +62,16 @@ class Writer
      * @ORM\Column(name="post_count", type="integer", nullable=true)
      */
     private $postCount;
+
+    /**
+     * @var \Image
+     *
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * })
+     */
+    private $image;
 
 
 
@@ -211,5 +221,28 @@ class Writer
     public function getPostCount()
     {
         return $this->postCount;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Mft\BaseBundle\Entity\Image $image
+     * @return Writer
+     */
+    public function setImage(\Mft\BaseBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Mft\BaseBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

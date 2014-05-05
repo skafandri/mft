@@ -1,0 +1,81 @@
+<?php
+
+namespace Mft\BaseBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Post
+ *
+ * @ORM\Table(name="post", indexes={@ORM\Index(name="fk_post_story1_idx", columns={"story_id"}), @ORM\Index(name="fk_post_writer1_idx", columns={"writer_id"})})
+ * @ORM\Entity
+ */
+class Post
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text", type="text", nullable=true)
+     */
+    private $text;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="create_time", type="datetime", nullable=true)
+     */
+    private $createTime;
+
+    /**
+     * @var \Story
+     *
+     * @ORM\ManyToOne(targetEntity="Story")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="story_id", referencedColumnName="id")
+     * })
+     */
+    private $story;
+
+    /**
+     * @var \Writer
+     *
+     * @ORM\ManyToOne(targetEntity="Writer")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="writer_id", referencedColumnName="id")
+     * })
+     */
+    private $writer;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Image", inversedBy="post")
+     * @ORM\JoinTable(name="post_has_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
+     */
+    private $image;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+}

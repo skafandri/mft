@@ -1,1 +1,8 @@
 new-story: Start a new story
+
+
+story:
+    type:
+        short:
+            title: Short paragraphs
+            description: "Story with short paragraphs {min} to {max} characters. Ideal for fast moving events like Adventure novels, Science fiction novels, Verse novels"
