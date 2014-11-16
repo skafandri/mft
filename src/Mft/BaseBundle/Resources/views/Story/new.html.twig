@@ -27,13 +27,16 @@
             <input type="text" id="story-new-title" class="form-control" placeholder="{{'story.new.title-placeholder'|trans}}">
         </div>
         <div class="form-group">
-            <label for="story-new-post">{{'story.new.post'|trans}}</label>
-            <textarea class="form-control" rows="5" id="story-new-post">{{'story.new.post-placeholder'|trans}}</textarea>
+            <label for="story-new-cover">{{'story.new.cover'|trans}}</label>
+            <span class="btn btn-default btn-file">
+                {{'choose.file'|trans}} <input  id="story-new-cover" type="file">
+            </span>
         </div>
         <div class="form-group">
             <label for="story-new-tags">{{'story.new.tags'|trans}}</label>
-            <div  id="story-new-tags"  class="form-control" contenteditable="true" placeholder="{{'story.new.tags-placeholder'|trans}}">
+            <div id="story-new-tags"  class="form-control" contenteditable="true" placeholder="{{'story.new.tags-placeholder'|trans}}">
             </div>
+        </div>
         <span class="small pull-right btn btn-link" id="cmd-story-new-options">{{'more-options'|trans}}</span>
         <div id="div-story-new-options">
             <div class="form-group" >
@@ -46,6 +49,10 @@
                     <input type="checkbox" id="story-new-secure"> {{'story.new.secure'|trans}}
                 </label>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="story-new-post">{{'story.new.post'|trans}}</label>
+            <textarea class="form-control" rows="5" id="story-new-post">{{'story.new.post-placeholder'|trans}}</textarea>
         </div>
         <button  class="btn btn-primary btn-lg">{{'story.new.submit'|trans}}</button>
     </form>

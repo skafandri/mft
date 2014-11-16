@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Mft\BaseBundle\MftBaseBundle(),
             new Mft\AdminBundle\MftAdminBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Skafandri\SynchronizedBundle\SynchronizedBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

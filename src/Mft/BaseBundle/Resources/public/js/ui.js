@@ -11,10 +11,10 @@ $(function() {
     $.get(tagsUrl, function(data){
         tags = eval('('+data+')');
     });
+    $('#story-new-tags').data('tags', []);
     
     $('#story-new-tags').autocomplete({
         source : function (request, response){
-            
             var result = Array();
             var term = request.term.trim();
             console.log(term);
@@ -27,12 +27,21 @@ $(function() {
         },
         select: function(event, ui){
             var selectedTags = $(this).data('tags');
-            console.log(selectedTags);
-            var tag = $('<div class="label label-default pull-left tag" contenteditable="false"></div>');
-            var tagLabel = $('<span class="tag-label pull-left">'+ui.item.label+'</span>');
-            var tagDelete = $('<span class="ui-icon ui-icon-close pull-left"></span>');
-            $(this).append(tag.append(tagLabel).append(tagDelete));
+            selectedTags.push(ui.item);
+            $(this).html('');
+            for (var i in selectedTags){
+                $(this).append(createTagUi(selectedTags[i]));
+            }
+            $(this).append("&nbsp;");
             return false;
         }
     });
 });
+
+function createTagUi(tag){
+    var tagDiv = $('<div class="label label-default pull-left tag" contenteditable="false"></div>');
+    var tagLabel = $('<span class="tag-label pull-left">'+tag.label+'</span>');
+    var tagDelete = $('<span class="ui-icon ui-icon-close pull-left"></span>');
+    tagDiv.append(tagLabel).append(tagDelete);
+    return tagDiv;
+}
